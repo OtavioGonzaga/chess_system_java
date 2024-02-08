@@ -5,7 +5,7 @@ public class Board {
 	private int columns;
 	private Piece[][] pieces;
 
-	public void boardPieces(Piece piece, Position position) {
+	public void placePieces(Piece piece, Position position) {
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
