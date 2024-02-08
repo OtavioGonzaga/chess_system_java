@@ -1,4 +1,3 @@
-
 import application.UI;
 import chess.ChessMatch;
 

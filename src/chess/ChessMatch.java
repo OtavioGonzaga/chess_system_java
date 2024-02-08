@@ -1,12 +1,8 @@
 package chess;
 
-import java.util.Arrays;
-
 import boardgame.Board;
 import boardgame.Position;
 import chess.pieces.Pawn;
-import chess.pieces.Rook;
-
 public class ChessMatch {
 	private Board board = new Board(8, 8);
 
