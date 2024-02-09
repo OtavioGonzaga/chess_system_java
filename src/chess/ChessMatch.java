@@ -2,7 +2,9 @@ package chess;
 
 import boardgame.Board;
 import boardgame.Position;
+import chess.pieces.King;
 import chess.pieces.Pawn;
+import chess.pieces.Queen;
 public class ChessMatch {
 	private Board board = new Board(8, 8);
 
@@ -10,13 +12,19 @@ public class ChessMatch {
 		initialSetup();
 	}
 
+	private void placeChessPiece(char column, byte row, ChessPiece piece) {
+		board.placePieces(piece, new ChessPosition(column, row).toPosition());
+	}
+
 	private void initialSetup() {
+		//King and Queen
+		placeChessPiece('d', (byte) 1, new King(board, Color.WHITE));
+		placeChessPiece('d', (byte) 8, new King(board, Color.BLACK));
+		placeChessPiece('e', (byte) 1, new Queen(board, Color.WHITE));
+		placeChessPiece('e', (byte) 8, new Queen(board, Color.BLACK));
 		// Initialize pawns
-		for (byte i = 0; i < 2; i++) {
-			for (byte j = 0; j < 8; j++) {
-				byte color = (byte) ((i == 0) ? 1 : 6); // testa se é vez das peças brancas ou pretas, caso sejam as pretas, linha 2, caso sejam as brancas, linha 7
-				board.placePieces(new Pawn(board, ((color == 1)? Color.BLACK : Color.WHITE)), new Position(color, j));
-			}
+		for (byte i = 0; i < 16; i++) {
+			board.placePieces(new Pawn(board, ((i < 8)? Color.BLACK : Color.WHITE)), new Position((i < 8)?  1 : 6, (i < 8) ? i : (i - 8)));
 		}
 	}
 
