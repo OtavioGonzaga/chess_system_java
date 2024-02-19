@@ -16,8 +16,6 @@ public class ChessMatch {
 		initialSetup();
 	}
 
-
-
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition destinationPosition) {
 		Position source = sourcePosition.toPosition();
 		Position destination = destinationPosition.toPosition();
