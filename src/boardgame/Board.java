@@ -44,6 +44,15 @@ public class Board {
 		return pieces[position.getRow()][position.getColumn()];
 	}
 
+	public Piece removePiece(Position position) {
+		if (!positionExists(position)) throw new BoardException("Position does not exist");
+		if (piece(position) == null) return null;
+		Piece aux  = piece(position);
+		aux.position = null;
+		pieces[position.getRow()][position.getColumn()] = null;
+		return aux;
+	}
+
 	// Getters
 	public int getColumns() {
 		return columns;

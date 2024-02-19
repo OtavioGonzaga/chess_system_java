@@ -1,6 +1,10 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
@@ -34,6 +38,17 @@ public class UI {
 			System.out.println();
 		}
 		System.out.println("\n  A B C D E F G H");
+	}
+
+	public static ChessPosition readChessPosition(Scanner sc) {
+		try {
+			String read = sc.next();
+			char column = read.charAt(0);
+			byte row = Byte.parseByte(read.substring(1));
+			return new ChessPosition(column, row);	
+		} catch (RuntimeException e) {
+			throw new InputMismatchException("Error reading chess position. Enter values from a1 to h8");
+		}
 	}
 
 	private static void printPiece(ChessPiece piece) {
