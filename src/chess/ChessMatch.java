@@ -36,8 +36,9 @@ public class ChessMatch {
 	private void validateSourcePosition(Position sourcePosition) {
 		if (!board.thereIsAPiece(sourcePosition))
 			throw new ChessException("There is no piece on source position");
-		if (!board.piece(sourcePosition).isThereAnyPossibleMove())
+		if (!board.piece(sourcePosition).isThereAnyPossibleMove()) {
 			throw new ChessException("There is no possible move to the chosen piece");
+		}
 	}
 
 	private void placeChessPiece(char column, byte row, ChessPiece piece) {
@@ -47,6 +48,13 @@ public class ChessMatch {
 	private void validateTargetPosition(Position source, Position target) {
 		if (!board.piece(source).possibleMove(target))
 			throw new ChessException("The choiced piece can't move to the target position");
+	}
+
+	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+		Position position = sourcePosition.toPosition();
+		validateSourcePosition(position);
+
+		return board.piece(position).possibleMoves();
 	}
 
 	private void initialSetup() {
@@ -70,10 +78,10 @@ public class ChessMatch {
 		placeChessPiece('h', (byte) 1, new Rook(board, Color.WHITE));
 		placeChessPiece('a', (byte) 8, new Rook(board, Color.BLACK));
 		placeChessPiece('h', (byte) 8, new Rook(board, Color.BLACK));
-		// Initialize pawns
+		// Initialize pawns TODO: remove comments
 		// for (byte i = 0; i < 16; i++) {
-		// 	board.placePieces(new Pawn(board, ((i < 8) ? Color.BLACK : Color.WHITE)),
-		// 			new Position((i < 8) ? 1 : 6, (i < 8) ? i : (i - 8)));
+		// board.placePieces(new Pawn(board, ((i < 8) ? Color.BLACK : Color.WHITE)),
+		// new Position((i < 8) ? 1 : 6, (i < 8) ? i : (i - 8)));
 		// }
 	}
 

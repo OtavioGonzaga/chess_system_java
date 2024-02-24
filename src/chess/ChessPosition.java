@@ -7,13 +7,15 @@ public class ChessPosition {
 	private byte row;
 
 	public ChessPosition(char column, byte row) {
-		if (column < 'a' || column > 'h' || row < 1 || row > 8) throw new ChessException("This position does not exist");
+		if (column < 'a' || column > 'h' || row < 1 || row > 8)
+			throw new ChessException("This position does not exist");
 		this.column = column;
 		this.row = row;
 	}
 
 	public ChessPosition(Position position) {
-		if (position.getColumn() < 1 || position.getColumn() > 8 || position.getRow() < 1 || position.getRow() > 8) throw new ChessException("This position does not exist");
+		if (position.getColumn() < 1 || position.getColumn() > 8 || position.getRow() < 1 || position.getRow() > 8)
+			throw new ChessException("This position does not exist");
 		this.column = toChessPosition(position).getColumn();
 		this.row = toChessPosition(position).getRow();
 	}

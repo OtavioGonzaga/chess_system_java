@@ -27,17 +27,17 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-	public static void clearScreen() {  
-		System.out.print("\033[H\033[2J");  
-		System.out.flush();  
-	}  
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
 
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print((pieces[i].length - i) + "  ");
 
 			for (int j = 0; j < pieces[i].length; j++) {
-				printPiece(pieces[i][j]);
+				printPiece(pieces[i][j], false);
 			}
 
 			System.out.println();
@@ -45,28 +45,40 @@ public class UI {
 		System.out.println("\n  A B C D E F G H");
 	}
 
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print((pieces[i].length - i) + "  ");
+
+			for (int j = 0; j < pieces[i].length; j++) {
+				printPiece(pieces[i][j], possibleMoves[i][j]);
+			}
+
+			System.out.println();
+		}
+		System.out.println("\n  A B C D E F G H");
+	}
+
+	private static void printPiece(ChessPiece piece, boolean background) {
+		if (background)
+			System.out.print(ANSI_CYAN_BACKGROUND);
+		if (piece == null) {
+			System.out.print("-" + ANSI_RESET);
+		} else {
+			if (piece.getColor() == Color.WHITE) {
+				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
+			} else {
+				System.out.print(ANSI_PURPLE + piece + ANSI_RESET);
+			}
+		}
+		System.out.print(" ");
+	}
+
 	public static ChessPosition readChessPosition(Scanner sc) {
 		try {
-			String read = sc.next();
-			char column = read.charAt(0);
-			byte row = Byte.parseByte(read.substring(1));
-			return new ChessPosition(column, row);	
+			String read = sc.nextLine();
+			return new ChessPosition(read.charAt(0), Byte.parseByte(read.substring(1)));
 		} catch (RuntimeException e) {
 			throw new InputMismatchException("Error reading chess position. Enter values from a1 to h8");
 		}
-	}
-
-	private static void printPiece(ChessPiece piece) {
-		if (piece == null) {
-			System.out.print("-");
-		} else {
-			if (piece.getColor() == Color.WHITE) {
-                System.out.print(ANSI_WHITE + piece + ANSI_RESET);
-            }
-            else {
-                System.out.print(ANSI_PURPLE + piece + ANSI_RESET);
-            }
-		}
-		System.out.print(" ");
 	}
 }

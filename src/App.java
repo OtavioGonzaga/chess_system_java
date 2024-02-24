@@ -15,13 +15,16 @@ public class App {
 				UI.clearScreen();
 				UI.printBoard(match.getPieces());
 				System.out.println();
-				
+
 				System.out.print("\nSource: ");
 				ChessPosition source = UI.readChessPosition(scanner);
-	
+
+				UI.clearScreen();
+				UI.printBoard(match.getPieces(), match.possibleMoves(source));
+
 				System.out.print("\nTarget: ");
 				ChessPosition target = UI.readChessPosition(scanner);
-	
+
 				match.performChessMove(source, target);
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
@@ -31,7 +34,7 @@ public class App {
 				System.out.println(e.getMessage());
 				scanner.nextLine();
 				scanner.nextLine();
-			} 
+			}
 		}
 		// TODO:scanner.close();
 	}
