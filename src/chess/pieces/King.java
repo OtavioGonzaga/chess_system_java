@@ -19,9 +19,9 @@ public class King extends ChessPiece {
 
 		Position auxPos = new Position(position.getRow() - 1, position.getColumn() - 1);
 
-		for (int i = 0; i < 3; i++) {
+		for (byte i = 0; i < 3; i++) {
 			auxPos.setColumn(position.getColumn() - 1);
-			for (int j = 0; j < 3; j++) {
+			for (byte j = 0; j < 3; j++) {
 				if (getBoard().positionExists(auxPos) && (!getBoard().thereIsAPiece(auxPos) || thereIsOpponentpiece(auxPos)))
 					mat[auxPos.getRow()][auxPos.getColumn()] = true;
 				auxPos.setColumn(auxPos.getColumn() + 1);

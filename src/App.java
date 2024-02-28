@@ -13,7 +13,8 @@ public class App {
 		while (true) {
 			try {
 				UI.clearScreen();
-				UI.printBoard(match.getPieces());
+				UI.clearScreen();
+				UI.printMatch(match);
 				System.out.println();
 
 				System.out.print("\nSource: ");
