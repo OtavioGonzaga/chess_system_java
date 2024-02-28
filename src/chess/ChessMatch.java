@@ -78,10 +78,9 @@ public class ChessMatch {
 		placeChessPiece('h', (byte) 1, new Rook(board, Color.WHITE));
 		placeChessPiece('a', (byte) 8, new Rook(board, Color.BLACK));
 		placeChessPiece('h', (byte) 8, new Rook(board, Color.BLACK));
-		// Initialize pawns TODO: remove comments
+		// Initialize pawns
 		// for (byte i = 0; i < 16; i++) {
-		// board.placePieces(new Pawn(board, ((i < 8) ? Color.BLACK : Color.WHITE)),
-		// new Position((i < 8) ? 1 : 6, (i < 8) ? i : (i - 8)));
+		// 	board.placePieces(new Pawn(board, ((i < 8) ? Color.BLACK : Color.WHITE)), new Position((i < 8) ? 1 : 6, (i < 8) ? i : (i - 8)));
 		// }
 	}
 

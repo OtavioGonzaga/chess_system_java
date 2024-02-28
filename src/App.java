@@ -29,10 +29,8 @@ public class App {
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
 				scanner.nextLine();
-				scanner.nextLine();
 			} catch (InputMismatchException e) {
 				System.out.println(e.getMessage());
-				scanner.nextLine();
 				scanner.nextLine();
 			}
 		}
