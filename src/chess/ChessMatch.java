@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
@@ -12,8 +14,10 @@ import chess.pieces.Rook;
 
 public class ChessMatch {
 	private Board board = new Board(8, 8);
-	private int turn;
+	private int turn = 1;
 	private Color currentPlayer = Color.WHITE;
+	private ArrayList<ChessPiece> onBoardPieces = new ArrayList<ChessPiece>();
+	private ArrayList<ChessPiece> capturedPieces = new ArrayList<ChessPiece>();
 
 	public ChessMatch() {
 		initialSetup();
@@ -22,10 +26,10 @@ public class ChessMatch {
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
-		
+
 		validateSourcePosition(source);
 		validateTargetPosition(source, target);
-		
+
 		ChessPiece capturedPiece = makeMove(source, target);
 
 		nextTurn();
@@ -34,10 +38,17 @@ public class ChessMatch {
 	}
 
 	private ChessPiece makeMove(Position source, Position target) {
+
 		Piece p = board.removePiece(source);
-		Piece capturedPiece = board.removePiece(target);
+		ChessPiece capturedPiece = (ChessPiece) board.removePiece(target);
 		board.placePieces(p, target);
-		return (ChessPiece) capturedPiece;
+
+		if (capturedPiece != null) {
+			onBoardPieces.remove(capturedPiece);
+			capturedPieces.add(capturedPiece);
+		}
+
+		return capturedPiece;
 	}
 
 	private void validateSourcePosition(Position sourcePosition) {
@@ -52,6 +63,7 @@ public class ChessMatch {
 
 	private void placeChessPiece(char column, byte row, ChessPiece piece) {
 		board.placePieces(piece, new ChessPosition(column, row).toPosition());
+		onBoardPieces.add(piece);
 	}
 
 	private void validateTargetPosition(Position source, Position target) {
@@ -94,7 +106,8 @@ public class ChessMatch {
 		placeChessPiece('h', (byte) 8, new Rook(board, Color.BLACK));
 		// Initialize pawns
 		// for (byte i = 0; i < 16; i++) {
-		// 	board.placePieces(new Pawn(board, ((i < 8) ? Color.BLACK : Color.WHITE)), new Position((i < 8) ? 1 : 6, (i < 8) ? i : (i - 8)));
+		// board.placePieces(new Pawn(board, ((i < 8) ? Color.BLACK : Color.WHITE)), new
+		// Position((i < 8) ? 1 : 6, (i < 8) ? i : (i - 8)));
 		// }
 	}
 
