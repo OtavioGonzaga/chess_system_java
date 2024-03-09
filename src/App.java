@@ -19,7 +19,6 @@ public class App {
 				UI.clearScreen();
 				UI.clearScreen();
 				UI.printMatch(match, capturedPieces);
-				System.out.println();
 
 				System.out.print("\nSource: ");
 				ChessPosition source = UI.readChessPosition(scanner);
