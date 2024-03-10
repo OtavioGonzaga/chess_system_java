@@ -40,11 +40,23 @@ public class UI {
 		printBoard(match.getPieces());
 		printCapturedPieces(capturedPieces);
 		System.out.println("\nTurn: " + match.getTurn());
-		System.out.println("Waiting player: " + match.getCurrentPlayer());
-		if (match.getCheck()) {
-			System.out.println(ANSI_RED_BACKGROUND);
-			System.out.println("        CHECK!        ");
-			System.out.print(ANSI_RESET);
+
+		if (!match.getCheckMate()) {
+			System.out.println("Waiting player: " + match.getCurrentPlayer());
+
+			if (match.getCheck()) {
+				System.out.println(ANSI_RED_BACKGROUND);
+				System.out.println("        CHECK!        ");
+				System.out.print(ANSI_RESET);
+			}
+		}
+
+		if (match.getCheckMate()) {
+			System.out.println(ANSI_GREEN_BACKGROUND);
+			System.out.println("     CHECK-MATE!!     ");
+			System.out.println(ANSI_RESET);
+
+			System.out.println("The winner is " + match.getCurrentPlayer());
 		}
 	}
 
